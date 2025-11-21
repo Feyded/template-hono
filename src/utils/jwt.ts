@@ -33,9 +33,18 @@ export const generateRefreshToken = async (payload: UserArgs) => {
     .sign(getRefreshSecret());
 };
 
-export const verifyToken = async (token: string) => {
+export const verifyAccessToken = async (token: string) => {
   try {
     const { payload } = await jwtVerify(token, getAccessSecret());
+    return payload as JWTPayload;
+  } catch {
+    return null;
+  }
+};
+
+export const verifyRefreshToken = async (token: string) => {
+  try {
+    const { payload } = await jwtVerify(token, getRefreshSecret());
     return payload as JWTPayload;
   } catch {
     return null;
