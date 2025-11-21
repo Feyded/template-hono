@@ -2,7 +2,6 @@ import { verify } from "@node-rs/bcrypt";
 import {
   generateAccessToken,
   generateRefreshToken,
-  verifyToken,
 } from "@/utils/jwt.js";
 
 import { PrismaClient } from "@prisma/client";
@@ -28,18 +27,7 @@ export const loginService = async (email: string, password: string) => {
     email: user.email,
   });
 
-  return { access_token: accessToken, refresh_token: refreshToken };
-};
-
-export const refreshTokenService = async (refreshToken: string) => {
-  const payload = await verifyToken(refreshToken);
-  if (!payload) throw new Error("Invalid token");
-
-  const accessToken = await generateAccessToken({
-    id: payload.id,
-    role: payload.role,
-  });
-  return { accessToken };
+  return { accessToken, refreshToken };
 };
 
 export const logoutService = async (refreshToken: string) => {
