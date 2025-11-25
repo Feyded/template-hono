@@ -5,10 +5,11 @@ const prisma = new PrismaClient();
 export async function createUsers() {
   const users = [
     {
-      first_name: "John",
-      middle_name: "Morgan",
-      last_name: "Doe",
-      email: "john@example.com",
+      first_name: "James",
+      middle_name: "Paul",
+      last_name: "Ilagan",
+      email: "james@example.com",
+      role: "SUPER_ADMIN" as const,
       password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
     },
     {
