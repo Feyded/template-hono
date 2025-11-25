@@ -4,7 +4,7 @@ CREATE TABLE `users` (
     `first_name` VARCHAR(191) NOT NULL,
     `middle_name` VARCHAR(191) NULL,
     `last_name` VARCHAR(191) NOT NULL,
-    `role` VARCHAR(191) NOT NULL DEFAULT 'USER',
+    `role` ENUM('SUPER_ADMIN', 'ADMIN', 'USER') NOT NULL DEFAULT 'USER',
     `is_active` BOOLEAN NOT NULL DEFAULT true,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,

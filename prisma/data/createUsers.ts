@@ -8,7 +8,6 @@ export async function createUsers() {
       first_name: "John",
       middle_name: "Morgan",
       last_name: "Doe",
-      role: "SUPER_ADMIN",
       email: "john@example.com",
       password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
     },
