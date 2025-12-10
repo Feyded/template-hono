@@ -15,7 +15,8 @@
     "db:create": "prisma migrate dev --create-only",
     "db:generate": "prisma generate",
     "db:deploy": "prisma migrate deploy",
-    "db:status": "prisma migrate status"
+    "db:status": "prisma migrate status",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.5",
@@ -35,8 +36,11 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@types/node": "^20.11.17",
     "@types/pg": "^8.15.6",
+    "husky": "^9.1.7",
     "prisma": "^6.18.0",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3"
