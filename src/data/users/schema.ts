@@ -28,7 +28,7 @@ export const userSchemaObject = {
   password: z.string().openapi({
     example: "P@ssw0rd",
   }),
-  role: z.nativeEnum(UserRoleType).openapi({
+  role: z.enum(UserRoleType).openapi({
     example: UserRoleType.USER,
   }),
 };

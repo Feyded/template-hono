@@ -13,10 +13,10 @@ export const orderSchemaObject = {
   customer_name: z.string().openapi({
     example: "John Doe",
   }),
-  payment_method: z.nativeEnum(OrderPaymentMethod).openapi({
+  payment_method: z.enum(OrderPaymentMethod).openapi({
     example: OrderPaymentMethod.CASH,
   }),
-  status: z.nativeEnum(OrderStatus).openapi({
+  status: z.enum(OrderStatus).openapi({
     example: OrderStatus.PENDING,
   }),
   image_path: z.string().nullable().openapi({
