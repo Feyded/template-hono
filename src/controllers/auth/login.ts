@@ -68,7 +68,7 @@ export const loginRouteHandler: AppRouteHandler<typeof loginRoute> = async (
     secure: true,
     sameSite: "Strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
   });
 
   setCookie(c, "auth__refresh_token", tokens.refreshToken, {
@@ -76,7 +76,7 @@ export const loginRouteHandler: AppRouteHandler<typeof loginRoute> = async (
     secure: true,
     sameSite: "Strict",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30,
+    maxAge: 60 * 60 * 24 * 30, // 30 days
   });
 
   return c.json(
