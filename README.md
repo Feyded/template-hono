@@ -1,8 +1,8 @@
 # Nodejs Hono
 
-Template Hono Repo By Dean Zaballero
+Template Kysely, Hono, Prisma Repo By Dean Zaballero
 
-This project is built using **Node.js**, **Hono**, **TypeScript**, **Prisma**, and **MySQL** to provide a robust and scalable API
+This project is built using **Node.js**, **Hono**, **Kysely**, **TypeScript**, **Prisma**, and **MySQL** to provide a robust and scalable API. This repo also inspired by bossrodTV
 
 ---
 
@@ -10,6 +10,7 @@ This project is built using **Node.js**, **Hono**, **TypeScript**, **Prisma**, a
 
 - **Node** – JavaScript runtime
 - **Hono** – Ultra-fast web framework for Cloudflare / Bun / Node
+- **Kysely** – Type-safe SQL query builder for TypeScript
 - **TypeScript** – Typed superset of JavaScript
 - **Prisma ORM** – Type-safe database client
 - **MySQL** – Relational database
@@ -22,7 +23,7 @@ This project is built using **Node.js**, **Hono**, **TypeScript**, **Prisma**, a
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Feyded/template-hono.git
-cd template-hono
+git clone https://github.com/Feyded/template-kysely-hono-prisma.git
+cd template-kysely-hono-prisma
 pnpm install
 ```

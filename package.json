@@ -1,5 +1,5 @@
 {
-  "name": "template-hono",
+  "name": "template-kysely-hono-prisma",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/app.ts",
