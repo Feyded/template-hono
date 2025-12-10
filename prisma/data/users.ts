@@ -13,7 +13,7 @@ export async function createUsers(dbClient: DbClient) {
     },
     {
       first_name: "John",
-      middle_name: "Morgan",
+      middle_name: null,
       last_name: "Doe",
       email: "john@example.com",
       password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
