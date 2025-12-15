@@ -14,7 +14,6 @@ export type GetServerDateTimeResponse = z.infer<
 
 export const getServerDateTimeRoute = createRoute({
   middleware: [],
-  security: [{ cookieAuth: [] }],
   method: "get",
   path: "/server/date-time",
   tags: ["Server"],

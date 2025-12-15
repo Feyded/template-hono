@@ -26,7 +26,7 @@ export const updateOrderSchema = {
 };
 
 export const updateOrderRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "patch",
   path: "/orders/{order_id}",

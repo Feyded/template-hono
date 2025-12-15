@@ -31,11 +31,13 @@ export const loginService = async ({
   const accessToken = await generateAccessToken({
     id: user.id,
     email: user.email,
+    role: user.role,
   });
 
   const refreshToken = await generateRefreshToken({
     id: user.id,
     email: user.email,
+    role: user.role,
   });
 
   return { accessToken, refreshToken };

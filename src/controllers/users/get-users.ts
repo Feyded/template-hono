@@ -20,7 +20,7 @@ export const getUsersSchema = {
 };
 
 export const getUsersRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "get",
   path: "/users",

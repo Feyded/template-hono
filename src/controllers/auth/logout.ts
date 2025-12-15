@@ -15,7 +15,7 @@ const logoutSchema = {
 };
 
 export const logoutRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware()],
   security: [{ cookieAuth: [] }],
   method: "post",
   path: "/auth/logout",

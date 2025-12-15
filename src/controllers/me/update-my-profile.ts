@@ -17,7 +17,7 @@ export const updateMyProfileSchema = {
 };
 
 export const updateMyProfileRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware()],
   security: [{ cookieAuth: [] }],
   method: "patch",
   path: "/me",

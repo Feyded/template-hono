@@ -23,7 +23,7 @@ export const getMyProfileSchema = {
 export type GetMyProfileResponse = z.infer<typeof getMyProfileSchema.response>;
 
 export const getMyProfileRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware()],
   security: [{ cookieAuth: [] }],
   method: "get",
   path: "/me",

@@ -25,7 +25,7 @@ export const updateUserSchema = {
 };
 
 export const updateUserRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "patch",
   path: "/users/{user_id}",

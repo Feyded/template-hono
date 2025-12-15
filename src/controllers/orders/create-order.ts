@@ -17,7 +17,7 @@ export const createOrderSchema = {
 };
 
 export const createOrderRoute = createRoute({
-  middleware: [authenticationMiddleware],
+  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "post",
   path: "/orders",
