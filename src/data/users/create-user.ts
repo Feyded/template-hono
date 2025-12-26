@@ -8,7 +8,7 @@ export type CreateUserDataArgs = {
     first_name: string;
     middle_name: string | null;
     last_name: string;
-    email: string;
+    mobile_number: string;
     password: string;
   };
 };
@@ -18,12 +18,12 @@ export async function createUserData({
 }: CreateUserDataArgs) {
   let baseQuery = dbClient.selectFrom("users");
 
-  const emailExist = await baseQuery
-    .where("email", "=", payload.email)
+  const mobileExist = await baseQuery
+    .where("mobile_number", "=", payload.mobile_number)
     .executeTakeFirst();
 
-  if (emailExist) {
-    throw new ConflictError("Email already exist.");
+  if (mobileExist) {
+    throw new ConflictError("Mobile number already exist.");
   }
 
   const hashPassword = await hash(payload.password, 10);

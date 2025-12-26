@@ -22,7 +22,7 @@ export const orderSchemaObject = {
   image_path: z.string().nullable().openapi({
     example: "/public/uploads/sample.png",
   }),
-  amount: z.number().openapi({
+  amount: z.coerce.number().openapi({
     example: 175.0,
   }),
 };

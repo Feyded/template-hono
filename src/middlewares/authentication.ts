@@ -31,7 +31,7 @@ export function authenticationMiddleware(requiredRoles: UserRoleType[] = []) {
 
       accessToken = await generateAccessToken({
         id: verifiedRefreshToken.id as string,
-        email: verifiedRefreshToken.email as string,
+        mobile_number: verifiedRefreshToken.mobile_number as string,
         role: verifiedRefreshToken.role as string,
       });
 
@@ -44,17 +44,19 @@ export function authenticationMiddleware(requiredRoles: UserRoleType[] = []) {
 
       verifiedAccessToken = await verifyAccessToken(accessToken);
     }
-   
+
     if (
       requiredRoles.length > 0 &&
       !requiredRoles.includes(verifiedAccessToken?.role as UserRoleType)
     ) {
-      throw new ForbiddenError("Access denied");
+      throw new ForbiddenError(
+        "You do not have permission to perform this action."
+      );
     }
 
     c.set("session", {
       id: verifiedAccessToken?.id,
-      email: verifiedAccessToken?.email,
+      mobile_number: verifiedAccessToken?.mobile_number,
       role: verifiedAccessToken?.role,
     });
 

@@ -1,11 +1,11 @@
 import { userSchema, userSchemaOpenApi } from "@/data/users/schema.js";
-import { updateUserData } from "@/data/users/update-user.js";
+import { updateUserPasswordData } from "@/data/users/update-user-password.js";
 import { authenticationMiddleware } from "@/middlewares/authentication.js";
 import type { AppRouteHandler } from "@/types/hono.js";
 import { createRoute, z } from "@hono/zod-openapi";
 import { StatusCodes } from "http-status-codes";
 
-export const updateUserSchema = {
+export const updateUserPasswordSchema = {
   params: z.object({
     user_id: z
       .string()
@@ -16,30 +16,25 @@ export const updateUserSchema = {
       }),
   }),
   body: userSchema.pick({
-    first_name: true,
-    middle_name: true,
-    last_name: true,
-    role: true,
-    mobile_number: true,
-    is_active: true,
+    password: true,
   }),
   response: userSchemaOpenApi.omit({ password: true }),
 };
 
-export const updateUserRoute = createRoute({
+export const updateUserPasswordRoute = createRoute({
   middleware: [authenticationMiddleware(["SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "patch",
-  path: "/users/{user_id}",
+  path: "/users/{user_id}/password",
   tags: ["Users"],
-  summary: "Update an user",
-  description: "Update an user.",
+  summary: "Update user password",
+  description: "Update user password.",
   request: {
-    params: updateUserSchema.params,
+    params: updateUserPasswordSchema.params,
     body: {
       content: {
         "application/json": {
-          schema: updateUserSchema.body,
+          schema: updateUserPasswordSchema.body,
         },
       },
     },
@@ -48,7 +43,7 @@ export const updateUserRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: updateUserSchema.response,
+          schema: updateUserPasswordSchema.response,
         },
       },
       description: "User updated successfully",
@@ -56,14 +51,14 @@ export const updateUserRoute = createRoute({
   },
 });
 
-export const updateUserRouteHandler: AppRouteHandler<
-  typeof updateUserRoute
+export const updateUserPasswordRouteHandler: AppRouteHandler<
+  typeof updateUserPasswordRoute
 > = async (c) => {
   const dbClient = c.get("dbClient");
   const param = c.req.valid("param");
   const body = c.req.valid("json");
 
-  const user = await updateUserData({
+  const user = await updateUserPasswordData({
     dbClient,
     id: param.user_id,
     payload: body,

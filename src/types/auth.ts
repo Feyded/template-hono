@@ -1,5 +1,5 @@
 export type Session = {
   id: string;
-  email: string;
+  mobile_number: string;
   role: string;
 };

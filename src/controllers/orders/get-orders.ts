@@ -14,11 +14,6 @@ export const getOrdersSchema = {
   }),
   response: paginationSchema.extend({
     records: z.array(orderSchemaOpenApi),
-    total_records: z.number(),
-    total_pages: z.number(),
-    current_page: z.number(),
-    next_page: z.number().nullable(),
-    previous_page: z.number().nullable(),
   }),
 };
 
@@ -53,6 +48,7 @@ export const getOrdersRouteHandler: AppRouteHandler<
 
   const data = await getOrdersData({
     dbClient,
+    search: query?.search,
     limit: query?.limit,
     page: query?.page,
   });

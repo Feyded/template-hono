@@ -17,8 +17,9 @@ export const OrderPaymentMethod = {
 } as const;
 export type OrderPaymentMethod = (typeof OrderPaymentMethod)[keyof typeof OrderPaymentMethod];
 export const OrderStatus = {
+    PENDING: "PENDING",
     PAID: "PAID",
-    PENDING: "PENDING"
+    CANCELLED: "CANCELLED"
 } as const;
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus];
 export type orders = {
@@ -38,7 +39,7 @@ export type users = {
     last_name: string;
     role: Generated<UserRoleType>;
     is_active: Generated<boolean>;
-    email: string;
+    mobile_number: string;
     password: string;
     created_at: Generated<Timestamp>;
     updated_at: Generated<Timestamp>;

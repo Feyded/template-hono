@@ -4,15 +4,15 @@ import { z } from "@hono/zod-openapi";
 
 export const userSchemaObject = {
   id: z.string().uuid(),
-  created_at: z.union([z.coerce.date(), z.string()]).openapi({
-    example: new Date().toISOString(),
-  }),
-  updated_at: z.union([z.coerce.date(), z.string()]).openapi({
-    example: new Date().toISOString(),
-  }),
-  email: z.string().openapi({
-    example: "john.lee@gmail.com",
-  }),
+  mobile_number: z
+    .string()
+    .regex(
+      /^09\d{9}$/,
+      "Mobile number must be exactly 11 digits and start with 09"
+    )
+    .openapi({
+      example: "09425291111",
+    }),
   first_name: z.string().openapi({
     example: "John",
   }),
@@ -25,11 +25,17 @@ export const userSchemaObject = {
   is_active: z.boolean().openapi({
     example: true,
   }),
-  password: z.string().openapi({
+  password: z.string().min(3).max(30).openapi({
     example: "P@ssw0rd",
   }),
   role: z.enum(UserRoleType).openapi({
     example: UserRoleType.USER,
+  }),
+  created_at: z.union([z.coerce.date(), z.string()]).openapi({
+    example: new Date().toISOString(),
+  }),
+  updated_at: z.union([z.coerce.date(), z.string()]).openapi({
+    example: new Date().toISOString(),
   }),
 };
 

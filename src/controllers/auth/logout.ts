@@ -3,7 +3,6 @@ import { createRoute } from "@hono/zod-openapi";
 import { StatusCodes } from "http-status-codes";
 import { z } from "@hono/zod-openapi";
 import { setCookie } from "hono/cookie";
-import type { Session } from "@/types/auth.js";
 import { authenticationMiddleware } from "@/middlewares/authentication.js";
 
 const logoutSchema = {
@@ -38,11 +37,10 @@ export const logoutRoute = createRoute({
 export const logoutRouteHandler: AppRouteHandler<typeof logoutRoute> = async (
   c
 ) => {
-
   setCookie(c, "auth__access_token", "", {
     httpOnly: true,
     secure: true,
-    sameSite: "Strict",
+    sameSite: "none",
     path: "/",
     maxAge: 0,
   });
@@ -50,7 +48,7 @@ export const logoutRouteHandler: AppRouteHandler<typeof logoutRoute> = async (
   setCookie(c, "auth__refresh_token", "", {
     httpOnly: true,
     secure: true,
-    sameSite: "Strict",
+    sameSite: "none",
     path: "/",
     maxAge: 0,
   });

@@ -10,14 +10,15 @@ export const createUserSchema = {
     first_name: true,
     middle_name: true,
     last_name: true,
-    email: true,
+    mobile_number: true,
     password: true,
+    role: true,
   }),
   response: userSchemaOpenApi.omit({ password: true }),
 };
 
 export const createUserRoute = createRoute({
-  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
+  middleware: [authenticationMiddleware(["SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "post",
   path: "/users",

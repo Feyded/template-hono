@@ -1,5 +1,4 @@
-import { serve } from "@hono/node-server";
-import { Hono, type Context } from "hono";
+import { type Context } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { routes } from "./controllers/routes.js";
 import { errorHandlerMiddleware } from "./middlewares/error-handler.js";
@@ -48,10 +47,23 @@ if (envConfig.STAGE !== STAGES.Prod) {
   app.get("/reference", Scalar({ url: "/openapi.json" }));
 }
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://washmate-two.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend origin
-    credentials: true, // allow cookies
+    origin: (origin, c) => {
+      if (!origin) return null;
+
+      if (allowedOrigins.includes(origin)) {
+        return origin;
+      }
+
+      return null; // disallow other origins
+    },
+    credentials: true,
   })
 );
 
@@ -65,12 +77,4 @@ routes.forEach((route) => {
   app.route("/", route);
 });
 
-serve(
-  {
-    fetch: app.fetch,
-    port: envConfig.APP_PORT,
-  },
-  (info) => {
-    console.log(`✅ Server is running at http://localhost:${info.port}`);
-  }
-);
+export default app;

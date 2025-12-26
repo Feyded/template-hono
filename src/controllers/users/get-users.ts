@@ -20,7 +20,7 @@ export const getUsersSchema = {
 };
 
 export const getUsersRoute = createRoute({
-  middleware: [authenticationMiddleware(["ADMIN", "SUPER_ADMIN"])],
+  middleware: [authenticationMiddleware(["SUPER_ADMIN"])],
   security: [{ cookieAuth: [] }],
   method: "get",
   path: "/users",
@@ -50,6 +50,7 @@ export const getUsersRouteHandler: AppRouteHandler<
 
   const data = await getUsersData({
     dbClient,
+    search: query?.search,
     limit: query?.limit,
     page: query?.page,
   });

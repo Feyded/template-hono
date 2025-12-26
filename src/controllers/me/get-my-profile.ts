@@ -14,7 +14,7 @@ export const getMyProfileSchema = {
     last_name: true,
     role: true,
     is_active: true,
-    email: true,
+    mobile_number: true,
     created_at: true,
     updated_at: true,
   }),

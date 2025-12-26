@@ -2,6 +2,7 @@ import type { DbClient } from "@/db/create-db-client.js";
 
 export type GetOrdersDataArgs = {
   dbClient: DbClient;
+  search?: string;
   limit?: number;
   page?: number;
   orderBy?: "asc" | "desc";
@@ -9,11 +10,16 @@ export type GetOrdersDataArgs = {
 
 export async function getOrdersData({
   dbClient,
+  search,
   limit = 10,
   page = 1,
   orderBy = "desc",
 }: GetOrdersDataArgs) {
   let baseQuery = dbClient.selectFrom("orders");
+
+  if (search) {
+    baseQuery = baseQuery.where("customer_name", "ilike", `%${search}%`);
+  }
 
   const records = await baseQuery
     .selectAll()

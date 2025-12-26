@@ -13,7 +13,7 @@ export const updateMyProfileSchema = {
     middle_name: true,
     last_name: true,
   }),
-  response: userSchemaOpenApi,
+  response: userSchemaOpenApi.omit({password: true}),
 };
 
 export const updateMyProfileRoute = createRoute({

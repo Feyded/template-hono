@@ -2,6 +2,7 @@ import type { DbClient } from "@/db/create-db-client.js";
 
 type getUsersDataArgs = {
   dbClient: DbClient;
+  search?: string;
   limit?: number;
   page?: number;
   orderBy?: "asc" | "desc";
@@ -9,11 +10,22 @@ type getUsersDataArgs = {
 
 export async function getUsersData({
   dbClient,
+  search,
   limit = 10,
   page = 1,
   orderBy = "desc",
 }: getUsersDataArgs) {
   let baseQuery = dbClient.selectFrom("users");
+
+  if (search) {
+    baseQuery = baseQuery.where((eb) =>
+      eb.or([
+        eb("first_name", "ilike", `%${search}%`),
+        eb("middle_name", "ilike", `%${search}%`),
+        eb("last_name", "ilike", `%${search}%`),
+      ])
+    );
+  }
 
   const records = await baseQuery
     .select([
@@ -23,7 +35,7 @@ export async function getUsersData({
       "last_name",
       "role",
       "is_active",
-      "email",
+      "mobile_number",
       "created_at",
       "updated_at",
     ])

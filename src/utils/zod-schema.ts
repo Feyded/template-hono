@@ -9,6 +9,7 @@ export const paginationSchema = z.object({
 });
 
 export const listQuerySchema = z.object({
+  search: z.string().trim().optional(),
   limit: z.coerce.number().optional(),
   page: z.coerce.number().optional(),
   order_by: z.enum(["asc", "desc"]).optional(),

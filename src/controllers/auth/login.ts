@@ -7,8 +7,8 @@ import { setCookie } from "hono/cookie";
 
 const loginSchema = {
   body: z.object({
-    email: z.email().openapi({
-      example: "john.doe@example.com",
+    mobile_number: z.string().openapi({
+      example: "09424693111",
     }),
     password: z.string().openapi({
       example: "Password",
@@ -59,14 +59,14 @@ export const loginRouteHandler: AppRouteHandler<typeof loginRoute> = async (
 
   const tokens = await loginService({
     dbClient,
-    email: body.email,
+    mobile_number: body.mobile_number,
     password: body.password,
   });
 
   setCookie(c, "auth__access_token", tokens.accessToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "Strict",
+    sameSite: "none",
     path: "/",
     maxAge: 60 * 60 * 24 * 30, // 30 days
   });
@@ -74,7 +74,7 @@ export const loginRouteHandler: AppRouteHandler<typeof loginRoute> = async (
   setCookie(c, "auth__refresh_token", tokens.refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "Strict",
+    sameSite: "none",
     path: "/",
     maxAge: 60 * 60 * 24 * 30, // 30 days
   });
