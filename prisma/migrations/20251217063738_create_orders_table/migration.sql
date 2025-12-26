@@ -2,7 +2,7 @@
 CREATE TYPE "OrderPaymentMethod" AS ENUM ('CASH', 'GCASH', 'PAYMAYA');
 
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('PAID', 'PENDING');
+CREATE TYPE "OrderStatus" AS ENUM ('PENDING', 'PAID', 'CANCELLED');
 
 -- CreateTable
 CREATE TABLE "orders" (

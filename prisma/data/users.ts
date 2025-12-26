@@ -4,25 +4,19 @@ import { UserRoleType } from "@/db/types.js";
 export async function createUsers(dbClient: DbClient) {
   const users = [
     {
-      first_name: "James",
-      middle_name: "Paul",
-      last_name: "Ilagan",
-      email: "james@example.com",
+      first_name: "Karla",
+      middle_name: null,
+      last_name: "Go",
       role: UserRoleType.SUPER_ADMIN,
+      mobile_number: "09429318299",
       password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
     },
     {
       first_name: "John",
       middle_name: null,
       last_name: "Doe",
-      email: "john@example.com",
-      password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
-    },
-    {
-      first_name: "Mark",
-      middle_name: "Kanlo",
-      last_name: "Kanlas",
-      email: "mark@example.com",
+      role: UserRoleType.ADMIN,
+      mobile_number: "0942931019",
       password: "$2a$12$Ax19rFKcGjJGjrvLoeQP.ee9decDIHjjfPEal32RztBO0htNnWKIW",
     },
   ];
@@ -30,7 +24,7 @@ export async function createUsers(dbClient: DbClient) {
   for (const user of users) {
     const exist = await dbClient
       .selectFrom("users")
-      .where("email", "=", user.email)
+      .where("mobile_number", "=", user.mobile_number)
       .executeTakeFirst();
 
     if (!exist) {
